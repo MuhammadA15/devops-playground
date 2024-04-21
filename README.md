@@ -15,6 +15,6 @@ Project for learning more about CI/CD pipelines and other devops/aws related ser
 
 ## Technologies
 - Java SpringBoot
-- AWS
+- AWS ECS, EC2, SES
 - GitHub Actions
 - MongoDB
