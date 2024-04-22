@@ -1,6 +1,13 @@
 # devops-playground
 Project for learning more about CI/CD pipelines and other devops/aws related services
 
+## How to run the Java Sprint Boot backend
+- Startup a codespace on the branch of your choice
+- Run command in terminal: ./mvnw spring-boot:run
+- Make port public
+- Open "Ports" tab in the console
+- Click on the forwarded address under port 8080 (default port)
+
 ## Roadmap
 - Set up basic backend using Java Springboot
 - Set up a db for storing data, potentially with MongoDB
