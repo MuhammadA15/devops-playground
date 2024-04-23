@@ -1,12 +1,9 @@
-package com.example.demo.models;
+package com.example.demo.controllers.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.Optional;
 
-@Document("users")
-public class User {
+public class UserPatchRequest {
 
-    @Id
     private String userId;
 
     private String firstName;
@@ -14,7 +11,7 @@ public class User {
     private String email;
     private String username;
 
-    public User() {
+    public UserPatchRequest() {
     }
 
     public String getUserId() {
@@ -55,13 +52,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "User[id=%s, username='%s', firstName='%s', lastName='%s', email='%s']",
-                userId, username, firstName, lastName, email);
     }
 
 }

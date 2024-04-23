@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.controllers.dto.UserPatchRequest;
 import com.example.demo.models.User;
 import com.example.demo.services.UserService;
 
@@ -43,7 +44,10 @@ public class UserController {
 		return userService.getUserByLastName(lastname);
 	}
 
-	
+	@PatchMapping("/user")
+	public String patchUser(@RequestBody UserPatchRequest patchRequest) {
+		return userService.patchUser(patchRequest);
+	}
 
 	@PostMapping("/user")
 	public String createUser(@RequestBody User user) {
