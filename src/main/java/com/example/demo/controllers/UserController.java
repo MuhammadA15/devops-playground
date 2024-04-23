@@ -33,6 +33,18 @@ public class UserController {
 		return userService.getUserByUserName(username);
 	}
 
+	@GetMapping("/user/firstname/{firstname}")
+	public String getUsersByFirstName(@PathVariable String firstname) {
+		return userService.getUserByFirstName(firstname);
+	}
+
+	@GetMapping("/user/lastname/{lastname}")
+	public String getUsersByLastName(@PathVariable String lastname) {
+		return userService.getUserByLastName(lastname);
+	}
+
+	
+
 	@PostMapping("/user")
 	public String createUser(@RequestBody User user) {
 		try {

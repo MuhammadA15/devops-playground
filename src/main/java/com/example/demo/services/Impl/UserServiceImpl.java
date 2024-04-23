@@ -30,4 +30,16 @@ class UserServiceImpl implements UserService {
         repository.save(user);
     }
 
+    @Override
+    public String getUserByFirstName(String firstname) {
+        System.err.println(firstname);
+        return repository.findByFirstName(firstname).toString();
+    }
+
+    @Override
+    public String getUserByLastName(String lastname) {
+        System.err.println(lastname);
+        return repository.findByLastName(lastname).toString();
+    }
+
 }

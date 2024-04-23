@@ -12,4 +12,8 @@ public interface UserService {
 
     void createUser(User user);
 
+    String getUserByFirstName(String firstname);
+
+    String getUserByLastName(String lastname);
+
 }
