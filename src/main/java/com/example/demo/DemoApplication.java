@@ -13,8 +13,7 @@ import com.example.demo.repositories.UserRepository;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 // import org.springframework.data.mongodb.repository.config;
 
-
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 // @EnableMongoRepositories(basePackageClasses = UserRepository.class)
 public class DemoApplication {
 

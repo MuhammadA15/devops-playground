@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.dto.UserPatchRequest;
 import com.example.demo.models.User;
 import com.example.demo.services.UserService;
 
@@ -24,13 +25,11 @@ public class UserController {
 	}
 
 	@GetMapping("/user")
-	public List<User> getAllUsers() {
-		return userService.getAllUsers();
-	}
+	public List<User> getUser(@RequestParam(value = "username", required = false) String username,
+			@RequestParam(value = "firstname", required = false) String firstname,
+			@RequestParam(value = "lastname", required = false) String lastname) {
 
-	@GetMapping("/user/{username}")
-	public String getUsers(@PathVariable String username) {
-		return userService.getUserByUserName(username);
+		return userService.getUser(username, firstname, lastname);
 	}
 
 	@PostMapping("/user")
@@ -42,6 +41,21 @@ public class UserController {
 		}
 
 		return "Success!";
+	}
+
+	@PatchMapping("/user/{userId}")
+	public String patchUser(@RequestBody UserPatchRequest patchRequest, @PathVariable String userId) {
+		return userService.patchUser(userId, patchRequest);
+	}
+
+	@DeleteMapping("/user/{userId}")
+	public String deleteUser(@PathVariable String userId) {
+		try {
+			userService.deleteUser(userId);
+			return "User succesfully deleted";
+		} catch (Exception e) {
+			return "Operation failed " + e.getMessage();
+		}
 	}
 
 }
