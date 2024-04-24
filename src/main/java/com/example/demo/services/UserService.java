@@ -19,4 +19,6 @@ public interface UserService {
 
     String patchUser(UserPatchRequest patchRequest);
 
+    String deleteUser(String id);
+
 }

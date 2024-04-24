@@ -80,4 +80,14 @@ class UserServiceImpl implements UserService {
         return "Successfully Updated User!";
     }
 
+    @Override
+    public String deleteUser(String id) {
+        if(repository.existsById(id)) {
+            repository.deleteById(id);
+            return "User succesfully deleted";
+        } else {
+            throw new RuntimeException("User not found");
+        }
+    }
+
 }

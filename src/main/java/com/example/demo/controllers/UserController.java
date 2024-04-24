@@ -60,4 +60,14 @@ public class UserController {
 		return "Success!";
 	}
 
+	@DeleteMapping("/user/{id}")
+	public String deleteUser(@PathVariable String id){
+		try{
+			userService.deleteUser(id);
+			return "User succesfully deleted";
+		} catch(Exception e){
+			return "Operation failed " + e.getMessage();
+		}
+	}
+
 }
