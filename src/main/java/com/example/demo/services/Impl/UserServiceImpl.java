@@ -1,13 +1,14 @@
 package com.example.demo.services.Impl;
 
 import com.example.demo.services.UserService;
-import com.example.demo.controllers.dto.UserPatchRequest;
+import com.example.demo.dto.UserPatchRequest;
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,13 +19,19 @@ class UserServiceImpl implements UserService {
     private UserRepository repository;
 
     @Override
-    public List<User> getAllUsers() {
-        return repository.findAll();
-    }
+    public List<User> getUser(String username, String firstname, String lastname) {
+        List<User> user = new ArrayList<User>();
+        if (username != null) {
+            user = repository.findByUsername(username);
+        } else if (firstname != null) {
+            user = repository.findByFirstName(firstname);
+        } else if (lastname != null) {
+            user = repository.findByLastName(lastname);
+        } else {
+            user = repository.findAll();
+        }
 
-    @Override
-    public String getUserByUserName(String username) {
-        return repository.findByUsername(username).toString();
+        return user;
     }
 
     @Override
@@ -33,24 +40,12 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getUserByFirstName(String firstname) {
-        // System.err.println(firstname);
-        return repository.findByFirstName(firstname).toString();
-    }
-
-    @Override
-    public String getUserByLastName(String lastname) {
-        // System.err.println(lastname);
-        return repository.findByLastName(lastname).toString();
-    }
-
-    @Override
-    public String patchUser(UserPatchRequest patchRequest) {
-        if (patchRequest.getUserId() == null) {
+    public String patchUser(String userId, UserPatchRequest patchRequest) {
+        if (userId == null) {
             return "Error: No UserId provided";
         }
 
-        User user = repository.findByUserId(patchRequest.getUserId());
+        User user = repository.findByUserId(userId);
         if (user == null) {
             return "Error: Could not find user to update";
         }
@@ -78,6 +73,16 @@ class UserServiceImpl implements UserService {
         repository.save(user);
 
         return "Successfully Updated User!";
+    }
+
+    @Override
+    public String deleteUser(String userId) {
+        if (repository.existsById(userId)) {
+            repository.deleteById(userId);
+            return "User succesfully deleted";
+        } else {
+            throw new RuntimeException("User not found");
+        }
     }
 
 }
