@@ -1,10 +1,8 @@
-package com.example.demo.controllers.dto;
+package com.example.demo.dto;
 
 import java.util.Optional;
 
 public class UserPatchRequest {
-
-    private String userId;
 
     private String firstName;
     private String lastName;
@@ -12,14 +10,6 @@ public class UserPatchRequest {
     private String username;
 
     public UserPatchRequest() {
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getFirstName() {

@@ -13,13 +13,13 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends MongoRepository<User, String> {
     
     // @Query("{name:'?0'}")
-    public User findByUsername(String username);
+    public List<User> findByUsername(String username);
 
     public List<User> findAll();
 
-    public User findByFirstName(String firstname);
+    public List<User> findByFirstName(String firstname);
 
-    public User findByLastName(String lastname);
+    public List<User> findByLastName(String lastname);
 
     public User findByUserId(String userId);
 

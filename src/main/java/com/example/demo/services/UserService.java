@@ -2,23 +2,17 @@ package com.example.demo.services;
 
 import java.util.List;
 
-import com.example.demo.controllers.dto.UserPatchRequest;
+import com.example.demo.dto.UserPatchRequest;
 import com.example.demo.models.User;
 
 public interface UserService {
-
-    List<User> getAllUsers();
     
-    String getUserByUserName(String username);
+    List<User> getUser(String username, String firstname, String lastname);
 
     void createUser(User user);
 
-    String getUserByFirstName(String firstname);
+    String patchUser(String userId, UserPatchRequest patchRequest);
 
-    String getUserByLastName(String lastname);
-
-    String patchUser(UserPatchRequest patchRequest);
-
-    String deleteUser(String id);
+    String deleteUser(String userId);
 
 }
