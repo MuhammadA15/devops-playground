@@ -13,10 +13,17 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
+public
 class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    public UserServiceImpl(UserRepository repository) {
+    this.repository = repository;
+}
+
 
     @Override
     public List<User> getUser(String username, String firstname, String lastname) {
