@@ -43,9 +43,13 @@ class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
-        repository.save(user);
+        if (user != null) {
+            repository.save(user);
+        } else {
+            throw new IllegalArgumentException("User entity cannot be null");
+        }
     }
-
+    
     @Override
     public String patchUser(String userId, UserPatchRequest patchRequest) {
         if (userId == null) {
