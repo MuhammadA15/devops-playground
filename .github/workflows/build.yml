@@ -19,6 +19,10 @@ jobs:
             distribution: 'temurin' # See 'Supported distributions' for available options
             java-version: '21'
       
+      - name: Extract Version
+        id: extract_version
+        run: echo "VERSION=$(./mvnw -q -Dexec.executable='echo' -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT 
+      
       - name: Build Application
         run: |
             mvn clean
@@ -44,4 +48,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/devops-playground:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/devops-playground:${{ steps.extract_version.outputs.VERSION }}, ${{ secrets.DOCKER_HUB_USERNAME }}/devops-playground:latest
