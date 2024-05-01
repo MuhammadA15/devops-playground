@@ -49,3 +49,5 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/devops-playground:${{ steps.extract_version.outputs.VERSION }}, ${{ secrets.DOCKER_HUB_USERNAME }}/devops-playground:latest
+
+          build-args: APP_VERSION=${{ steps.extract_version.outputs.VERSION }}
