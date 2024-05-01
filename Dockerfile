@@ -10,4 +10,4 @@ EXPOSE 8080
 
 ENV JAR_VERSION=${APP_VERSION}
 
-CMD java -jar demo-${JAR_VERSION}-SNAPSHOT.jar
+CMD java -jar demo-${JAR_VERSION}.jar
