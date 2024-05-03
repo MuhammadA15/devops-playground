@@ -12,7 +12,8 @@ jobs:
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-test:
-    stage: test
-    run:
-        - mvn clean test
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Maven test
+              run: mvn clean test
