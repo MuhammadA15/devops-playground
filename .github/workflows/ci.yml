@@ -15,5 +15,14 @@ jobs:
     test:
         runs-on: ubuntu-latest
         steps:
-            - name: Maven test
-              run: mvn clean test
+            - name: Checkout the repository
+              uses: actions/checkout@v2
+            
+            - name: Setup Java 21
+              uses: actions/setup-java@v4
+              with:
+                distribution: 'temurin' # See 'Supported distributions' for available options
+                java-version: '21'
+
+            - name: Run tests with Maven
+              run: mvn -B test --file pom.xml
