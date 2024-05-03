@@ -47,7 +47,7 @@ public class UserServiceImplTest {
         when(userRepository.save(any(User.class))).thenReturn(newUser);
 
         // Mock the repository findByUsername method
-        // when(userRepository.findByUsername(newUser.getUsername())).thenReturn(List.of(newUser));
+        when(userRepository.findByUsername(newUser.getUsername())).thenReturn(List.of(newUser));
 
         // Act
         userService.createUser(newUser);
