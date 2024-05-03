@@ -48,7 +48,7 @@ public class UserServiceImplTest {
 
         // Mock the repository findByUsername method
         when(userRepository.findByUsername(newUser.getUsername())).thenReturn(List.of(newUser));
-
+        
         // Act
         userService.createUser(newUser);
 
@@ -158,5 +158,4 @@ public class UserServiceImplTest {
         assertThat(result).isEqualTo("User succesfully deleted");
         assertThat(userRepository.findById(userId)).isEmpty();
     }
-
 }
