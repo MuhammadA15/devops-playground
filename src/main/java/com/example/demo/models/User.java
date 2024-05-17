@@ -13,6 +13,7 @@ public class User {
     private String lastName;
     private String email;
     private String username;
+    private String password;
 
     public User() {
     }
@@ -57,11 +58,19 @@ public class User {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return String.format(
-                "User[id=%s, username='%s', firstName='%s', lastName='%s', email='%s']",
-                userId, username, firstName, lastName, email);
+                "User[id=%s, username='%s', firstName='%s', lastName='%s', email='%s', password='%s']",
+                userId, username, firstName, lastName, email, password);
     }
 
 }
