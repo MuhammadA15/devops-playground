@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.demo.dto.UserPatchRequest;
 import com.example.demo.models.User;
 import com.example.demo.services.UserService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 public class UserController {
 
 	@Autowired
