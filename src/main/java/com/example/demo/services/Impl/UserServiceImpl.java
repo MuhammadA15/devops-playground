@@ -87,6 +87,18 @@ class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> logUserIn(String email, String password) {
+        List<User> user = new ArrayList<User>();
+        if (email == null) {
+            return "email required";
+        }
+        if(password == null){
+            return "Password doesnt match email";
+        }
+        return user;
+    }
+
+    @Override
     public String deleteUser(String userId) {
         if (repository.existsById(userId)) {
             repository.deleteById(userId);
