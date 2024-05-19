@@ -4,8 +4,8 @@ import java.util.Optional;
 
 public class UserLoginDto {
 
-    private string email;
-    private string password;
+    private String email;
+    private String password;
 
     public UserLoginDto() {
     }
@@ -23,6 +23,6 @@ public class UserLoginDto {
     }
 
     public void setPassword(String password) {
-        this.email = password;
+        this.password = password;
     }
 }
