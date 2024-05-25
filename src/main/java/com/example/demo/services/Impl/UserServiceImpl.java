@@ -1,10 +1,14 @@
 package com.example.demo.services.Impl;
 
 import com.example.demo.services.UserService;
+import com.example.demo.dto.UserLoginDto;
 import com.example.demo.dto.UserPatchRequest;
+import com.example.demo.dto.UserResponseDto;
 import com.example.demo.models.User;
 import com.example.demo.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -13,17 +17,15 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
-public
-class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository repository;
 
     @Autowired
     public UserServiceImpl(UserRepository repository) {
-    this.repository = repository;
-}
-
+        this.repository = repository;
+    }
 
     @Override
     public List<User> getUser(String username, String firstname, String lastname) {
@@ -49,7 +51,7 @@ class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("User entity cannot be null");
         }
     }
-    
+
     @Override
     public String patchUser(String userId, UserPatchRequest patchRequest) {
         if (userId == null) {
@@ -84,6 +86,35 @@ class UserServiceImpl implements UserService {
         repository.save(user);
 
         return "Successfully Updated User!";
+    }
+
+    @Override
+    public ResponseEntity<?> userLogin(UserLoginDto userCredentialData) {
+        UserResponseDto userResponse = new UserResponseDto();
+        if (userCredentialData.getEmail() == null) {
+            userResponse.setMessage("Email is required");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userResponse);
+        }
+        if (userCredentialData.getPassword() == null) {
+            userResponse.setMessage("Password is required");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userResponse);
+        }
+
+        List<User> users = repository.findByEmail(userCredentialData.getEmail());
+
+        if (users.isEmpty()) {
+            userResponse.setMessage("User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userResponse);
+        }
+
+        if (!users.get(0).getPassword().equals(userCredentialData.getPassword())) {
+            userResponse.setMessage("Email or Password is incorrect");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(userResponse);
+        }
+
+        userResponse.setMessage("Success!");
+        userResponse.setUsers(users);
+        return ResponseEntity.status(HttpStatus.OK).body(userResponse);
     }
 
     @Override
