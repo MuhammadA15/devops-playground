@@ -9,11 +9,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.example.demo.dto.UserLoginDto;
 import com.example.demo.dto.UserPatchRequest;
 import com.example.demo.models.User;
 import com.example.demo.services.UserService;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 @RestController
+@CrossOrigin
 public class UserController {
 
 	@Autowired
@@ -56,6 +60,12 @@ public class UserController {
 		} catch (Exception e) {
 			return "Operation failed " + e.getMessage();
 		}
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> userLogin(@RequestBody UserLoginDto userCredentialData) {
+		System.out.println("someone tried to login!");
+		return userService.userLogin(userCredentialData);
 	}
 
 }
