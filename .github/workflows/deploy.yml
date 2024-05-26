@@ -61,7 +61,7 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          docker build -t $ECR_REGISTRY/$REPOSITORY:latest .
+          docker build --build-arg APP_VERSION=${{ steps.extract_version.outputs.VERSION }} -t $ECR_REGISTRY/$REPOSITORY:latest .
           docker push $ECR_REGISTRY/$REPOSITORY:latest
           echo "image=$ECR_REGISTRY/$REPOSITORY:latest" >> $GITHUB_OUTPUT
 
