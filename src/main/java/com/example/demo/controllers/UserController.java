@@ -25,7 +25,7 @@ public class UserController {
 
 	@GetMapping("/")
 	public String home() {
-		return "Welcome to the home route";
+		return "Welcome to the home route v2";
 	}
 
 	@GetMapping("/user")
